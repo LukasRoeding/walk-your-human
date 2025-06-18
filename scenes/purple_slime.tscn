@@ -1,8 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0x4vdsnduxry"]
+[gd_scene load_steps=14 format=3 uid="uid://d0x4vdsnduxry"]
 
 [ext_resource type="Script" uid="uid://ggwtsxddipx7" path="res://scripts/purple_slime.gd" id="1_p4tba"]
 [ext_resource type="Texture2D" uid="uid://dmv8xp4wkkvqb" path="res://assets/sprites/slime_purple.png" id="1_rwesy"]
 [ext_resource type="PackedScene" uid="uid://demwyl26cabi5" path="res://scenes/killzone.tscn" id="2_p4tba"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4tba"]
+atlas = ExtResource("1_rwesy")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw5n6"]
+atlas = ExtResource("1_rwesy")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4btqv"]
+atlas = ExtResource("1_rwesy")
+region = Rect2(48, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o0hry"]
 atlas = ExtResource("1_rwesy")
@@ -24,6 +36,20 @@ region = Rect2(72, 24, 24, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_p4tba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw5n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4btqv")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_o0hry")
 }, {
 "duration": 1.0,
@@ -36,24 +62,35 @@ animations = [{
 "texture": SubResource("AtlasTexture_5vw4l")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 7.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4btqv"]
 radius = 7.0
 
-[node name="purple_slime" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4tba"]
+radius = 7.0
+
+[node name="purple_slime" type="Area2D"]
+light_mask = 3
+visibility_layer = 3
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_p4tba")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kw5n6")
-autoplay = "default"
-frame_progress = 0.546217
+animation = &"die"
+autoplay = "idle"
 
 [node name="Killzone" parent="." instance=ExtResource("2_p4tba")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_4btqv")
 
@@ -73,3 +110,14 @@ target_position = Vector2(-0.00247522, 10)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(-10, 0)
 target_position = Vector2(0, 21)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_p4tba")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

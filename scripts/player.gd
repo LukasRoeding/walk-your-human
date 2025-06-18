@@ -86,6 +86,7 @@ func _on_shit_timeout():
 		direction = 1
 	new_node.position = global_position - Vector2(-20 * direction, height * 0.5)
 	new_node.z_index = 100
+	new_node.name = "shit"
 	get_tree().current_scene.add_child(new_node)
 	
 func push_rigid_bodies():
