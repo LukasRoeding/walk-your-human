@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4w0lof68bw0g"]
+
+[ext_resource type="Script" uid="uid://d0coeerhs3gkg" path="res://scripts/shit.gd" id="1_bxddc"]
+[ext_resource type="Texture2D" uid="uid://d1mosl6rjsill" path="res://assets/sprites/shit.png" id="2_bxddc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bxddc"]
+friction = 0.05
+bounce = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxddc"]
+atlas = ExtResource("2_bxddc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ls27i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxddc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ssuvv"]
+radius = 5.2
+
+[node name="Shit" type="RigidBody2D"]
+collision_layer = 3
+mass = 0.251
+physics_material_override = SubResource("PhysicsMaterial_bxddc")
+script = ExtResource("1_bxddc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_ls27i")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.50463e-36, -1.78814e-07)
+scale = Vector2(1.7, 1.7)
+shape = SubResource("CircleShape2D_ssuvv")
