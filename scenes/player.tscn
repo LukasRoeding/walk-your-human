@@ -307,8 +307,9 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks7u2"]
-size = Vector2(19, 25.9906)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2wvv"]
+radius = 15.5
+height = 37.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -318,18 +319,15 @@ script = ExtResource("1_ks7u2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -24)
 rotation = -0.00480312
-scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_xnj03")
-animation = &"bark"
-frame_progress = 0.89601
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.994706, -9.50001)
+position = Vector2(0, -7.5)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_ks7u2")
+shape = SubResource("CapsuleShape2D_d2wvv")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
 one_shot = true
 
 [node name="Timer2" type="Timer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0x4vdsnduxry"]
+[gd_scene load_steps=13 format=3 uid="uid://d0x4vdsnduxry"]
 
 [ext_resource type="Script" uid="uid://ggwtsxddipx7" path="res://scripts/purple_slime.gd" id="1_p4tba"]
 [ext_resource type="Texture2D" uid="uid://dmv8xp4wkkvqb" path="res://assets/sprites/slime_purple.png" id="1_rwesy"]
@@ -7,10 +7,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4tba"]
 atlas = ExtResource("1_rwesy")
 region = Rect2(0, 48, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kw5n6"]
-atlas = ExtResource("1_rwesy")
-region = Rect2(24, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4btqv"]
 atlas = ExtResource("1_rwesy")
@@ -37,9 +33,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p4tba")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kw5n6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4btqv")
@@ -81,7 +74,7 @@ script = ExtResource("1_p4tba")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kw5n6")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Killzone" parent="." instance=ExtResource("2_p4tba")]
