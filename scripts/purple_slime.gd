@@ -14,6 +14,7 @@ var direction := 1
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_timer: Timer = $Timer
 @onready var purple_slime: Area2D = $"."
+@onready var killzone: Area2D = $Killzone
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -66,6 +67,7 @@ func turn_right() -> void:
 	animated_sprite.flip_h = false
 
 func die():
+	killzone.queue_free()
 	animated_sprite.play("die")
 	death_timer.start()
 

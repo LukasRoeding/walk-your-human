@@ -84,7 +84,7 @@ func _on_shit_timeout():
 	var direction = -1
 	if animated_sprite_2d.flip_h:
 		direction = 1
-	new_node.position = global_position - Vector2(-20 * direction, height * 0.5)
+	new_node.position = global_position - Vector2(-30 * direction, height * 0.5)
 	new_node.z_index = 100
 	new_node.name = "shit"
 	get_tree().current_scene.add_child(new_node)
