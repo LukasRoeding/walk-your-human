@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cmnf5pkakuub2" path="res://assets/tiles/mp_cs_buildings.png" id="1_ba0x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
-size = Vector2(32, 9)
+size = Vector2(30, 8)
 
 [node name="Platform" type="AnimatableBody2D"]
 
