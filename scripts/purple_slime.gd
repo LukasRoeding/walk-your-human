@@ -13,8 +13,7 @@ var direction := 1
 @onready var ray_cast_left_horizontal: RayCast2D = $RayCastLeftHorizontal
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_timer: Timer = $Timer
-@onready var purple_slime: Area2D = $"."
-@onready var killzone: Area2D = $Killzone
+@onready var collision_shape_2d: CollisionShape2D = $Killzone/CollisionShape2D
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -67,7 +66,7 @@ func turn_right() -> void:
 	animated_sprite.flip_h = false
 
 func die():
-	killzone.queue_free()
+	collision_shape_2d.queue_free()
 	animated_sprite.play("die")
 	death_timer.start()
 
