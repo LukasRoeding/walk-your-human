@@ -4,7 +4,8 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "player":
-		body.get_node("CollisionShape2D").queue_free()
+		if body.has_node("CollisionShape2D"):
+			body.get_node("CollisionShape2D").queue_free()
 		Engine.time_scale = 0.5
 		timer.start()
 
