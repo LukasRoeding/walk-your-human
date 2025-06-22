@@ -12,4 +12,4 @@ func _process(delta: float) -> void:
 
 func add_score():
 	score = score + 1
-	text = 'Leckerchen: ' + str(score)
+	text = 'Treats: ' + str(score)
