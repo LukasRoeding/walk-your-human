@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		sleep_timer.start()
 		sleep.play()
 
-	if Input.is_action_just_pressed("shit") and is_on_floor() and timers_stopped():
+	if Input.is_action_just_pressed("shit") and timers_stopped():
 		shit_timer.start()
 		
 	# Get the input direction and handle the movement/deceleration.
@@ -46,10 +46,10 @@ func _physics_process(delta: float) -> void:
 	elif direction < 0:
 		animated_sprite_2d.flip_h = true
 
-	if is_on_floor():
-		if not shit_timer.is_stopped():
-			animated_sprite_2d.play("shit")
-		elif not sleep_timer.is_stopped():
+	if not shit_timer.is_stopped():
+		animated_sprite_2d.play("shit")
+	elif is_on_floor():
+		if not sleep_timer.is_stopped():
 			animated_sprite_2d.play("sleep")
 		elif not bark_timer.is_stopped():
 			animated_sprite_2d.play("bark")
