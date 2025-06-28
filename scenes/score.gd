@@ -8,8 +8,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var fps = Engine.get_frames_per_second()   
+	text = 'FPS: ' + str(int(fps)) + '\nTreats: ' + str(score)
 	pass
 
 func add_score():
 	score = score + 1
-	text = 'Treats: ' + str(score)

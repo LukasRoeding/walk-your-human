@@ -345,6 +345,7 @@ stream = ExtResource("8_smehm")
 
 [node name="jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_y4r1p")
+volume_db = -3.0
 
 [node name="poop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_ur7pv")

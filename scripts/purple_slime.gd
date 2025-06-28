@@ -66,9 +66,11 @@ func turn_right() -> void:
 	animated_sprite.flip_h = false
 
 func die():
-	collision_shape_2d.queue_free()
-	animated_sprite.play("die")
-	death_timer.start()
+	if death_timer.is_stopped():
+		death_timer.start()
+		collision_shape_2d.queue_free()
+		animated_sprite.play("die")
+		death_timer.start()
 
 func _on_DeathTimer_timeout():
 	queue_free()
@@ -77,6 +79,6 @@ func _on_DeathTimer_timeout():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("shit"):
+	if body.is_in_group("shit") && body.has_node("CollisionShape2D"):
 		body.get_node("CollisionShape2D").queue_free()
 		die()

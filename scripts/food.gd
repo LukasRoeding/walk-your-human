@@ -1,9 +1,9 @@
 extends Area2D
-@onready var score: Label = $"../../CanvasLayer/Score"
 
+@onready var score: Label = $"../../CanvasLayer/Score"
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 
 func _on_body_entered(body: Node2D) -> void:
-	print("+1 coin")
-	score.add_score()
+	score.add_score() 
+	audio_stream_player_2d.play()
 	queue_free()
-	pass # Replace with function body.
