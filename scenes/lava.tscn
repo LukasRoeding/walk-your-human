@@ -1,32 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://da0y1ds5kph32"]
+[gd_scene load_steps=8 format=3 uid="uid://da0y1ds5kph32"]
 
 [ext_resource type="Texture2D" uid="uid://7fg78t3stiro" path="res://assets/tiles/LavaTileset_16px.png" id="2_dw3wf"]
 [ext_resource type="PackedScene" uid="uid://demwyl26cabi5" path="res://scenes/killzone.tscn" id="2_f10td"]
+[ext_resource type="Shader" uid="uid://cufupp840mt4m" path="res://shader/lava.gdshader" id="2_snnrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxvwp"]
-size = Vector2(18, 12)
+size = Vector2(16, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_snnrc"]
-atlas = ExtResource("2_dw3wf")
-region = Rect2(18, 0, 18, 12)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f10td"]
+frequency = 0.006
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f10td"]
-atlas = ExtResource("2_dw3wf")
-region = Rect2(108, 0, 18, 12)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3w25c"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_f10td")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3w25c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_snnrc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f10td")
-}],
-"loop": true,
-"name": &"default",
-"speed": 6.0
-}]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxvwp"]
+shader = ExtResource("2_snnrc")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_3w25c")
+shader_parameter/speed = Vector2(0.06, 0.1)
+shader_parameter/distortion = 0.01
 
 [node name="lava" type="Node2D"]
 
@@ -36,8 +29,9 @@ animations = [{
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_sxvwp")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sxvwp")
 position = Vector2(0, 1)
-sprite_frames = SubResource("SpriteFrames_3w25c")
-autoplay = "default"
-frame_progress = 0.998761
+texture = ExtResource("2_dw3wf")
+region_enabled = true
+region_rect = Rect2(14, 0, 16, 12)
