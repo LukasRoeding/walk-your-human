@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 160.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -320.0
 
 @onready var shit_timer: Timer = $Timer
 @onready var sleep_timer: Timer = $Timer2

@@ -21,6 +21,6 @@ void fragment() {
 	COLOR = texture(TEXTURE, UV + noise * distortion);
 	// Reduce x distortion by multiplying noise.x by a smaller factor
 	vec4 screen_color = texture(screen_texture, SCREEN_UV + noise * distortion);
-	COLOR = mix(COLOR, COLOR * screen_color, 0.4); // Adjust 0.5 to control strength // Adjust 0.5 to control strength
+	COLOR = mix(COLOR, COLOR * screen_color, 0.5); // Adjust 0.5 to control strength // Adjust 0.5 to control strength
 
 }
