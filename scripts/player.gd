@@ -11,6 +11,7 @@ const JUMP_VELOCITY = -320.0
 @onready var poop: AudioStreamPlayer2D = $poop
 @onready var jump: AudioStreamPlayer2D = $jump
 @onready var sleep: AudioStreamPlayer2D = $sleep
+@onready var score: Label = $"../CanvasLayer/Score"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -76,18 +77,20 @@ func _ready():
 	shit_timer.timeout.connect(_on_shit_timeout)
 	
 func _on_shit_timeout():
-	poop.play()
-	var new_node = shit.instantiate()
-	var sprite = new_node.get_node("AnimatedSprite2D")
-	var frame_texture = sprite.sprite_frames.get_frame_texture(sprite.animation, 0)
-	var height = frame_texture.get_height()
-	var direction = -1
-	if animated_sprite_2d.flip_h:
-		direction = 1
-	new_node.position = global_position - Vector2(-30 * direction, height * 0.5)
-	new_node.z_index = 1
-	new_node.name = "shit"
-	get_tree().current_scene.add_child(new_node)
+	if(score.shit > 0):
+		poop.play()
+		var new_node = shit.instantiate()
+		var sprite = new_node.get_node("AnimatedSprite2D")
+		var frame_texture = sprite.sprite_frames.get_frame_texture(sprite.animation, 0)
+		var height = frame_texture.get_height()
+		var direction = -1
+		if animated_sprite_2d.flip_h:
+			direction = 1
+		new_node.position = global_position - Vector2(-30 * direction, height * 0.5)
+		new_node.z_index = 1
+		new_node.name = "shit"
+		get_tree().current_scene.add_child(new_node)
+		score.remove_shit(1)
 	
 func push_rigid_bodies():
 	# Determine direction based on sprite flip (flip_h = facing left)

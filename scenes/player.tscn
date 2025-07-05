@@ -320,7 +320,6 @@ script = ExtResource("1_ks7u2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -24)
-rotation = -0.00480312
 sprite_frames = SubResource("SpriteFrames_xnj03")
 animation = &"idle"
 
