@@ -4,13 +4,19 @@ extends CharacterBody2D
 const SPEED = 160.0
 const JUMP_VELOCITY = -320.0
 
+var level_stopped = false
+
 @onready var shit_timer: Timer = $Timer
 @onready var sleep_timer: Timer = $Timer2
 @onready var bark_timer: Timer = $Timer3
+@onready var walk_timer: Timer = $WalkTimer
+
 @onready var bark: AudioStreamPlayer2D = $bark
 @onready var poop: AudioStreamPlayer2D = $poop
 @onready var jump: AudioStreamPlayer2D = $jump
 @onready var sleep: AudioStreamPlayer2D = $sleep
+@onready var walk: AudioStreamPlayer2D = $Walk
+
 @onready var score: Label = $"../CanvasLayer/Score"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -18,6 +24,12 @@ const JUMP_VELOCITY = -320.0
 var shit = preload("res://scenes/shit.tscn")
 
 func _physics_process(delta: float) -> void:
+	if(level_stopped):
+		if(sleep_timer.is_stopped()):
+			sleep_timer.start()
+			sleep.play()
+		else:
+			pass
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -59,6 +71,9 @@ func _physics_process(delta: float) -> void:
 		elif direction == 0:
 			animated_sprite_2d.play("idle")
 		else:
+			if(walk_timer.is_stopped()):
+				walk_timer.start()
+				walk.play()
 			animated_sprite_2d.play("run")
 	elif bark_timer.is_stopped():
 		animated_sprite_2d.play("jump")
@@ -114,3 +129,6 @@ func timers_stopped():
 
 func can_move():
 	return timers_stopped() and not Input.is_action_pressed("down")
+	
+func level_finished():
+	level_stopped = true

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Platformer_website"
-run/main_scene="uid://c3708rid7t6r"
+run/main_scene="uid://d3sqwh7t0nqoq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ window/size/viewport_height=360
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/handheld/orientation=4
+window/vsync/vsync_mode=0
 
 [editor]
 
