@@ -6,15 +6,15 @@ const JUMP_VELOCITY = -320.0
 
 var level_stopped = false
 
-@onready var shit_timer: Timer = $Timer
-@onready var sleep_timer: Timer = $Timer2
-@onready var bark_timer: Timer = $Timer3
+@onready var shit_timer: Timer = $PoopTimer
+@onready var sleep_timer: Timer = $SleepTimer
+@onready var bark_timer: Timer = $BarkTimer
 @onready var walk_timer: Timer = $WalkTimer
 
-@onready var bark: AudioStreamPlayer2D = $bark
-@onready var poop: AudioStreamPlayer2D = $poop
-@onready var jump: AudioStreamPlayer2D = $jump
-@onready var sleep: AudioStreamPlayer2D = $sleep
+@onready var bark: AudioStreamPlayer2D = $Bark
+@onready var poop: AudioStreamPlayer2D = $Poop
+@onready var jump: AudioStreamPlayer2D = $Jump
+@onready var sleep: AudioStreamPlayer2D = $Sleep
 @onready var walk: AudioStreamPlayer2D = $Walk
 
 @onready var score: Label = $"../CanvasLayer/Score"
@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor() and timers_stopped():
 		velocity.y = JUMP_VELOCITY
+
 		jump.play()
 
 	if Input.is_action_just_pressed("bark") and is_on_floor() and timers_stopped():
