@@ -1903,12 +1903,12 @@ region_enabled = true
 region_rect = Rect2(339, 500, 17, 19)
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ced32")]
-position = Vector2(394, -44)
+position = Vector2(0, -44)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(1, -14)
 scale = Vector2(1.31977, 0.371138)
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.1, 1.1)
 limit_left = -700
 limit_top = -400
 limit_right = 1400
@@ -2017,7 +2017,6 @@ region_rect = Rect2(79, 344, 24, 19)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("16_dlty2")
-volume_db = 5.0
 
 [node name="Fireflies" type="GPUParticles2D" parent="."]
 z_index = 5
@@ -2044,35 +2043,38 @@ script = ExtResource("22_oyh00")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 3
-position = Vector2(195, -259)
+position = Vector2(0, -259)
 motion_scale = Vector2(0.4, 1)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 z_index = -1
-position = Vector2(187, 159)
+position = Vector2(0, -20)
 texture = ExtResource("26_7ovj2")
+centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 3
-position = Vector2(195, -259)
+position = Vector2(0, -259)
 motion_scale = Vector2(0.6, 1)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(184, 157)
+position = Vector2(0, -20)
 texture = ExtResource("25_sffgu")
+centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 2
-position = Vector2(195, -259)
+position = Vector2(0, -259)
 motion_scale = Vector2(0.8, 1)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 z_index = 1
-position = Vector2(184, 156)
+position = Vector2(0, -20)
 texture = ExtResource("24_7fukg")
+centered = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 1
@@ -2080,17 +2082,18 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(192, 159)
+position = Vector2(0, -40)
 texture = ExtResource("23_llusb")
+centered = false
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 1
-position = Vector2(69, -403)
 motion_scale = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2(40, 342)
+position = Vector2(-199, -173)
 texture = ExtResource("28_1f4pw")
+centered = false
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 1
@@ -2098,8 +2101,9 @@ motion_scale = Vector2(0.8, 0)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-position = Vector2(192, 159)
+position = Vector2(0, -42)
 texture = ExtResource("26_sffgu")
+centered = false
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = 1
@@ -2107,5 +2111,6 @@ motion_scale = Vector2(0.8, 0)
 motion_mirroring = Vector2(630, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
-position = Vector2(191, 157)
+position = Vector2(2, -29)
 texture = ExtResource("26_1f4pw")
+centered = false

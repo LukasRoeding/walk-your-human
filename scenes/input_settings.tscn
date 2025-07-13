@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://dmysswk8pt0lm"]
+[gd_scene load_steps=4 format=3 uid="uid://dmysswk8pt0lm"]
+
+[ext_resource type="PackedScene" uid="uid://dpt1bht46ysip" path="res://scenes/options_button.tscn" id="1_b645d"]
+[ext_resource type="Script" uid="uid://bgebqyfyqi0x2" path="res://scripts/input_settings.gd" id="1_gubwu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gubwu"]
+bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="InputSettings" type="Control"]
 layout_mode = 3
@@ -7,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gubwu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -36,6 +43,28 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Actionslist" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="InputButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_b645d")]
+layout_mode = 2
+
+[node name="InputButton2" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_b645d")]
+layout_mode = 2
+
+[node name="InputButton3" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_b645d")]
+layout_mode = 2
+
+[node name="InputButton4" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_b645d")]
+layout_mode = 2
+
+[node name="InputButton5" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_b645d")]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_gubwu")
+text = "Schließen"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

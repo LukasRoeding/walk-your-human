@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3sqwh7t0nqoq"]
+[gd_scene load_steps=10 format=3 uid="uid://d3sqwh7t0nqoq"]
 
 [ext_resource type="Script" uid="uid://bskke8jbc6ef1" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://btt7kmopuv4w6" path="res://assets/sprites/1MGv7UD.png" id="1_l6cm7"]
 [ext_resource type="AudioStream" uid="uid://d14qkx61apcc1" path="res://assets/audio/fleas-folk-267806.mp3" id="3_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://dmysswk8pt0lm" path="res://scenes/input_settings.tscn" id="4_wu84c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l6cm7"]
 texture = ExtResource("1_l6cm7")
@@ -123,6 +124,10 @@ stream = ExtResource("3_bqqt6")
 volume_db = -12.048
 autoplay = true
 parameters/looping = true
+
+[node name="InputSettings" parent="." instance=ExtResource("4_wu84c")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_options_pressed"]

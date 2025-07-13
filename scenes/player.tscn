@@ -328,7 +328,7 @@ streams_count = 1
 stream_0/stream = ExtResource("11_d2wvv")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jej6c"]
-random_pitch = 2.0
+random_pitch = 1.5
 random_volume_offset_db = 2.0
 streams_count = 1
 stream_0/stream = ExtResource("12_3v2ag")
@@ -341,7 +341,7 @@ floor_stop_on_slope = false
 script = ExtResource("1_ks7u2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2.38419e-07, -24)
+position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_xnj03")
 animation = &"idle"
 
@@ -362,7 +362,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="WalkTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.35
 one_shot = true
 
 [node name="Bark" type="AudioStreamPlayer2D" parent="."]
@@ -382,5 +382,4 @@ volume_db = -10.0
 
 [node name="Walk" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_jej6c")
-volume_db = -30.0
-pitch_scale = 1.2
+volume_db = -35.0

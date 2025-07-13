@@ -1,5 +1,6 @@
 extends Control
 
+@onready var input_settings: Control = $InputSettings
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _on_start_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
+	input_settings.visible = true
 	pass # Replace with function body.
 
 
