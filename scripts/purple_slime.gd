@@ -79,6 +79,6 @@ func _on_DeathTimer_timeout():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("shit") && body.has_node("CollisionShape2D"):
+	if body.is_in_group("enemy_killer") && body.has_node("CollisionShape2D"):
 		body.get_node("CollisionShape2D").queue_free()
 		die()

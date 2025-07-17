@@ -22,6 +22,7 @@ var level_stopped = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var shit = preload("res://scenes/shit.tscn")
+const BARK_SCENE = preload("res://scenes/bark.tscn")
 
 func _physics_process(delta: float) -> void:
 	if(level_stopped):
@@ -43,6 +44,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("bark") and is_on_floor() and timers_stopped():
 		bark_timer.start()
 		bark.play()
+		
+		var fired_bark = BARK_SCENE.instantiate()
+		var direction = -1
+		if animated_sprite_2d.flip_h:
+			direction = 1
+		fired_bark.dir = direction
+		fired_bark.pos = global_position - Vector2(35 * direction, 7)
+		fired_bark.rota = direction
+		get_parent().add_child(fired_bark)
 
 	if Input.is_action_just_pressed("sleep") and is_on_floor() and timers_stopped():
 		sleep_timer.start()
