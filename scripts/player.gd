@@ -57,8 +57,9 @@ func _physics_process(delta: float) -> void:
 		if animated_sprite_2d.flip_h:
 			direction = 1
 		fired_bark.dir = direction
-		fired_bark.pos = global_position - Vector2(40 * direction, 7)
-		fired_bark.rota = direction
+		var offset = Vector2(-40 * direction, -10)
+		fired_bark.pos = global_position + offset
+		fired_bark.global_position = global_position + offset
 		get_parent().add_child(fired_bark)
 
 	if Input.is_action_just_pressed("sleep") and is_on_floor() and timers_stopped():

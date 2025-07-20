@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 	# Avoid walls or obstacles (but ignore the player)
 	if blocked_right:
 		var collider := ray_cast_right_horizontal.get_collider()
-		if collider.name != "player":
+		if collider && collider.name && collider.name != "player":
 			turn_left()
 
 	elif blocked_left:

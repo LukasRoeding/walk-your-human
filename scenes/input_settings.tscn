@@ -65,6 +65,6 @@ layout_mode = 2
 [node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_gubwu")
-text = "Schließen"
+text = "Zurück"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
