@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 const SPEED = 160.0
 const JUMP_VELOCITY = -320.0
+const COYOTE_TIME = 0.12  # in seconds
+
+var coyote_time_remaining = 0.0
 
 var level_stopped = false
 
@@ -25,6 +28,10 @@ var shit = preload("res://scenes/shit.tscn")
 const BARK_SCENE = preload("res://scenes/bark.tscn")
 
 func _physics_process(delta: float) -> void:
+	if is_on_floor():
+		coyote_time_remaining = COYOTE_TIME
+	else:
+		coyote_time_remaining -= delta
 	if(level_stopped):
 		if(sleep_timer.is_stopped()):
 			sleep_timer.start()
@@ -36,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor() and timers_stopped():
+	if Input.is_action_just_pressed("jump") and coyote_time_remaining > 0.0 and timers_stopped():
 		velocity.y = JUMP_VELOCITY
 
 		jump.play()
@@ -50,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		if animated_sprite_2d.flip_h:
 			direction = 1
 		fired_bark.dir = direction
-		fired_bark.pos = global_position - Vector2(35 * direction, 7)
+		fired_bark.pos = global_position - Vector2(40 * direction, 7)
 		fired_bark.rota = direction
 		get_parent().add_child(fired_bark)
 
