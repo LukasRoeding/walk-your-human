@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 
 	elif blocked_left:
 		var collider := ray_cast_left_horizontal.get_collider()
-		if collider.name != "player":
+		if collider && collider.name != "player":
 			turn_right()
 
 	# Move in current direction
@@ -81,4 +81,6 @@ func _on_DeathTimer_timeout():
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy_killer") && body.has_node("CollisionShape2D"):
 		body.get_node("CollisionShape2D").queue_free()
+		if body.is_in_group("projectile"):
+			body.queue_free()
 		die()

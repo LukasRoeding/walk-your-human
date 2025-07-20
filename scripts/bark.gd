@@ -3,11 +3,12 @@ extends CharacterBody2D
 var pos:Vector2
 var rota:float
 var dir:float
-var speed = 200
+var speed = 50
 @onready var death_timer: Timer = $DeathTimer
 
 func _ready():
 	add_to_group("enemy_killer")
+	add_to_group("projectile")
 	global_position=pos
 	death_timer.start()
 
