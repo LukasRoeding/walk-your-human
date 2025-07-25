@@ -3,6 +3,9 @@ extends Area2D
 @onready var score: Label = $"../../CanvasLayer/Score"
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 
+func _ready() -> void:
+	add_to_group("target")
+
 func _on_body_entered(body: Node2D) -> void:
 	if(body.is_in_group('player')):
 		score.add_score() 

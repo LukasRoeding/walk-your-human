@@ -4,21 +4,26 @@ extends CharacterBody2D
 const SPEED = 160.0
 const JUMP_VELOCITY = -320.0
 const COYOTE_TIME = 0.12  # in seconds
+const SNIFF_PARTICLES_SCENE = preload("res://scenes/sniff_particles.tscn")
 
 var coyote_time_remaining = 0.0
 
 var level_stopped = false
 
 @onready var shit_timer: Timer = $PoopTimer
-@onready var sleep_timer: Timer = $SleepTimer
+@onready var sniff_timer: Timer = $SniffTimer
 @onready var bark_timer: Timer = $BarkTimer
 @onready var walk_timer: Timer = $WalkTimer
+@onready var sleep_timer: Timer = $SleepTimer
 
 @onready var bark: AudioStreamPlayer2D = $Bark
 @onready var poop: AudioStreamPlayer2D = $Poop
 @onready var jump: AudioStreamPlayer2D = $Jump
-@onready var sleep: AudioStreamPlayer2D = $Sleep
+@onready var sniff: AudioStreamPlayer2D = $Sniff
 @onready var walk: AudioStreamPlayer2D = $Walk
+@onready var sleep: AudioStreamPlayer2D = $Sleep
+
+@onready var sniff_particles: GPUParticles2D = $SniffParticles
 
 @onready var score: Label = $"../CanvasLayer/Score"
 
@@ -62,9 +67,12 @@ func _physics_process(delta: float) -> void:
 		fired_bark.global_position = global_position + offset
 		get_parent().add_child(fired_bark)
 
-	if Input.is_action_just_pressed("sleep") and is_on_floor() and timers_stopped():
-		sleep_timer.start()
-		sleep.play()
+	if Input.is_action_just_pressed("sniff") and is_on_floor() and timers_stopped():
+		sniff_timer.start()
+		sniff.play()
+		var closest_target = get_closest_target()
+		if closest_target:
+			emit_trail_to(closest_target.global_position)
 
 	if Input.is_action_just_pressed("shit") and timers_stopped():
 		shit_timer.start()
@@ -83,6 +91,8 @@ func _physics_process(delta: float) -> void:
 	elif is_on_floor():
 		if not sleep_timer.is_stopped():
 			animated_sprite_2d.play("sleep")
+		elif not sniff_timer.is_stopped():
+			animated_sprite_2d.play("sniff")
 		elif not bark_timer.is_stopped():
 			animated_sprite_2d.play("bark")
 		elif Input.is_action_pressed("down"):
@@ -144,10 +154,44 @@ func push_rigid_bodies():
 			body.apply_force(force, Vector2.ZERO)
 			
 func timers_stopped():
-	return shit_timer.is_stopped() and sleep_timer.is_stopped() and bark_timer.is_stopped()
+	return shit_timer.is_stopped() and sniff_timer.is_stopped() and bark_timer.is_stopped() and sleep_timer.is_stopped()
 
 func can_move():
 	return timers_stopped() and not Input.is_action_pressed("down")
 	
 func level_finished():
 	level_stopped = true
+
+func get_closest_target() -> Node2D:
+	var closest_node: Node2D = null
+	var closest_dist := INF
+	var my_pos = global_position
+
+	for node in get_tree().get_nodes_in_group("target"):
+		if node is Node2D:
+			var dist = my_pos.distance_to(node.global_position)
+			if dist < closest_dist:
+				closest_dist = dist
+				closest_node = node
+
+	return closest_node
+
+
+func emit_trail_to(target_pos: Vector2):
+	# Instance a new GPUParticles2D node from a separate scene (with your configured particle effect)
+	var new_trail = SNIFF_PARTICLES_SCENE.instantiate()
+	
+	# Start position and add to the scene
+	new_trail.global_position = global_position
+	get_tree().current_scene.add_child(new_trail)
+
+	# Start emitting (assuming one_shot = true, it auto emits and stops)
+	new_trail.restart()
+
+	# Tween movement towards target
+	var duration = 2.0
+	var tween := create_tween()
+	tween.tween_property(new_trail, "global_position", target_pos, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	# When tween finishes, free the node to clean up
+	tween.connect("finished", Callable(new_trail, "queue_free"))

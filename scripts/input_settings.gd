@@ -14,7 +14,7 @@ const input_actions = {
 	"jump": "Springen",
 	"bark": "Bellen",
 	"shit": "Kacki",
-	"sleep": "Schlafen",
+	"sniff": "Schnüffeln",
 }
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

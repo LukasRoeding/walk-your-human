@@ -2016,7 +2016,7 @@ stream = ExtResource("16_dlty2")
 
 [node name="Fireflies" type="GPUParticles2D" parent="."]
 z_index = 5
-position = Vector2(1015, -124)
+position = Vector2(1007, -115)
 scale = Vector2(1.49053, 0.891089)
 amount = 5
 texture = ExtResource("21_a50t4")
