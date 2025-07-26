@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://c3708rid7t6r"]
+[gd_scene load_steps=57 format=4 uid="uid://c3708rid7t6r"]
 
 [ext_resource type="PackedScene" uid="uid://cfdk3ttq8i1mu" path="res://scenes/player.tscn" id="1_ced32"]
 [ext_resource type="Script" uid="uid://bxi3vwbfmh14x" path="res://scripts/base_scene_script.gd" id="1_f7vrh"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://do0iraenrkmvg" path="res://assets/sprites/sun.png" id="28_1f4pw"]
 [ext_resource type="Script" uid="uid://wyyflybtbyg" path="res://scripts/bark_tutorial_label.gd" id="29_askf8"]
 [ext_resource type="Script" uid="uid://bu30rpmr0bkxe" path="res://scripts/poop_tutorial_label.gd" id="30_q7ng0"]
+[ext_resource type="Script" uid="uid://b3ejx6ujtg7sw" path="res://scripts/sniff_tutorial_label.gd" id="31_n4ftf"]
 [ext_resource type="PackedScene" uid="uid://dmysswk8pt0lm" path="res://scenes/input_settings.tscn" id="31_nk7aj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_580sg"]
@@ -2110,6 +2111,17 @@ motion_mirroring = Vector2(630, 0)
 position = Vector2(2, -29)
 texture = ExtResource("26_1f4pw")
 centered = false
+
+[node name="SniffTutorialLabel" type="Label" parent="."]
+z_index = 1
+offset_left = 328.0
+offset_top = -16.0
+offset_right = 883.0
+offset_bottom = 27.0
+scale = Vector2(0.4, 0.4)
+text = "Drück 3, um deine Spürnase einzusetzen 
+und das nächste Leckerchen zu erschnüffeln"
+script = ExtResource("31_n4ftf")
 
 [node name="BarkTutorialLabel" type="Label" parent="."]
 offset_left = -193.0

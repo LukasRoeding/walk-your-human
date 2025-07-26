@@ -1,8 +1,9 @@
 extends CanvasLayer
 
 const BARK = preload("res://materials/bark.tres")
+const SNIFF_PARTICLES = preload("res://materials/sniff_particles.tres")
 
-var materials = [BARK]
+var materials = [BARK, SNIFF_PARTICLES]
 
 func _ready() -> void:
 	for material in materials:

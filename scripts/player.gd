@@ -182,16 +182,22 @@ func emit_trail_to(target_pos: Vector2):
 	var new_trail = SNIFF_PARTICLES_SCENE.instantiate()
 	
 	# Start position and add to the scene
-	new_trail.global_position = global_position
+	new_trail.global_position = target_pos
 	get_tree().current_scene.add_child(new_trail)
 
 	# Start emitting (assuming one_shot = true, it auto emits and stops)
 	new_trail.restart()
 
 	# Tween movement towards target
-	var duration = 2.0
+	var duration = 3.0
 	var tween := create_tween()
-	tween.tween_property(new_trail, "global_position", target_pos, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(new_trail, "global_position", global_position, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	# When tween finishes, free the node to clean up
-	tween.connect("finished", Callable(new_trail, "queue_free"))
+	# Wait for tween to finish
+	await tween.finished
+
+	# Wait 1 second after the tween
+	await get_tree().create_timer(1.0).timeout
+
+	# Then free the node
+	new_trail.queue_free()
