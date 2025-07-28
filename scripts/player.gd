@@ -23,6 +23,10 @@ var level_stopped = false
 @onready var walk: AudioStreamPlayer2D = $Walk
 @onready var sleep: AudioStreamPlayer2D = $Sleep
 
+@onready var line: Line2D = $Line
+@onready var human: RigidBody2D = $Human
+@onready var rope_marker: Marker2D = $RopeMarker
+
 @onready var sniff_particles: GPUParticles2D = $SniffParticles
 
 @onready var score: Label = $"../CanvasLayer/Score"
@@ -113,6 +117,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 
+	line.clear_points()
+	line.add_point(to_local(rope_marker.global_position)) # This will usually be Vector2.ZERO
+	line.add_point(to_local(human.global_position))   
+	
 	move_and_slide()
 	
 	push_rigid_bodies()

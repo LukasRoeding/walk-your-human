@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://cfdk3ttq8i1mu"]
+[gd_scene load_steps=65 format=4 uid="uid://cfdk3ttq8i1mu"]
 
 [ext_resource type="Script" uid="uid://b4b262xtah2rb" path="res://scripts/player.gd" id="1_ks7u2"]
 [ext_resource type="Texture2D" uid="uid://bxbm4s8h5pow3" path="res://assets/animations/IdleDog.png" id="1_qj5mo"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dbumt445g66hh" path="res://assets/audio/jump.mp3" id="9_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://8jxtycawdtgt" path="res://assets/audio/walk.mp3" id="12_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://4jcalbab5b2" path="res://assets/audio/sniff.mp3" id="12_jej6c"]
+[ext_resource type="Texture2D" uid="uid://b0q8dw7ngqxsx" path="res://assets/sprites/knight.png" id="14_f1ej7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
 atlas = ExtResource("2_fjrip")
@@ -375,6 +376,10 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = SubResource("AudioStreamMP3_oprun")
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oprun"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f1ej7"]
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 3
@@ -433,3 +438,31 @@ volume_db = -35.0
 [node name="Sleep" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_y4r1p")
 volume_db = -10.0
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -3)
+node_a = NodePath("../Human")
+node_b = NodePath("..")
+softness = 1.0
+angular_limit_lower = -0.523599
+angular_limit_upper = 0.523599
+
+[node name="Human" type="RigidBody2D" parent="."]
+position = Vector2(-51, -2)
+physics_material_override = SubResource("PhysicsMaterial_oprun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Human"]
+shape = SubResource("CircleShape2D_f1ej7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Human"]
+texture = ExtResource("14_f1ej7")
+region_enabled = true
+region_rect = Rect2(41, 10, 13, 18)
+
+[node name="Line" type="Line2D" parent="."]
+position = Vector2(1, 0)
+width = 2.0
+default_color = Color(0.335431, 0.151761, 0.160406, 1)
+
+[node name="RopeMarker" type="Marker2D" parent="."]
+position = Vector2(0, -9)
