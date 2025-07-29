@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d1mosl6rjsill" path="res://assets/sprites/shit.png" id="2_bxddc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bxddc"]
-friction = 0.05
-bounce = 0.5
+friction = 0.1
+bounce = 0.3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxddc"]
 atlas = ExtResource("2_bxddc")
@@ -29,7 +29,6 @@ radius = 7.05882
 scale = Vector2(1.5, 1.5)
 collision_layer = 3
 collision_mask = 3
-mass = 0.251
 physics_material_override = SubResource("PhysicsMaterial_bxddc")
 max_contacts_reported = 5
 script = ExtResource("1_bxddc")

@@ -7,7 +7,7 @@ func _ready() -> void:
 	add_to_group("target")
 
 func _on_body_entered(body: Node2D) -> void:
-	if(body.is_in_group('player')):
+	if(body.is_in_group('dog')):
 		score.add_score() 
 		audio_stream_player_2d.play()
 		queue_free()

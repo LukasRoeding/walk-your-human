@@ -23,13 +23,12 @@ var level_stopped = false
 @onready var walk: AudioStreamPlayer2D = $Walk
 @onready var sleep: AudioStreamPlayer2D = $Sleep
 
-@onready var line: Line2D = $Line
-@onready var human: RigidBody2D = $Human
-@onready var rope_marker: Marker2D = $RopeMarker
+@onready var pin_joint_2d: PinJoint2D = $"../PinJoint2D"
+@onready var human: RigidBody2D = $"../Human"
 
 @onready var sniff_particles: GPUParticles2D = $SniffParticles
 
-@onready var score: Label = $"../CanvasLayer/Score"
+@onready var score: Label = $"../../CanvasLayer/Score"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -86,8 +85,10 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 
 	if direction > 0:
+		# Facing right
 		animated_sprite_2d.flip_h = false
 	elif direction < 0:
+		# Facing left
 		animated_sprite_2d.flip_h = true
 
 	if not shit_timer.is_stopped():
@@ -115,17 +116,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-
-	line.clear_points()
-	line.add_point(to_local(rope_marker.global_position)) # This will usually be Vector2.ZERO
-	line.add_point(to_local(human.global_position))   
 	
 	move_and_slide()
 	
 	push_rigid_bodies()
 
 func _ready():
+	add_to_group("dog")
 	shit_timer.timeout.connect(_on_shit_timeout)
 	
 func _on_shit_timeout():

@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://cajs4mfg5l3vs"]
+
+[ext_resource type="PackedScene" uid="uid://cfdk3ttq8i1mu" path="res://scenes/player.tscn" id="1_6jhmp"]
+[ext_resource type="Script" uid="uid://b8l7qepaawadc" path="res://scenes/player_and_human.gd" id="1_abkd1"]
+[ext_resource type="Texture2D" uid="uid://b0q8dw7ngqxsx" path="res://assets/sprites/knight.png" id="2_abkd1"]
+[ext_resource type="Script" uid="uid://rhatmvp68647" path="res://scripts/human.gd" id="3_6ghb2"]
+[ext_resource type="Script" uid="uid://b8h2amnkaa16q" path="res://scripts/player_human_joint.gd" id="3_veo1t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6ghb2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_veo1t"]
+
+[node name="PlayerAndHuman" type="Node2D"]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_abkd1")
+
+[node name="Player" parent="." instance=ExtResource("1_6jhmp")]
+light_mask = 3
+visibility_layer = 3
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, -58)
+scale = Vector2(1.31977, 0.371138)
+zoom = Vector2(1.1, 1.1)
+limit_left = -500
+limit_top = -300
+limit_right = 1200
+limit_bottom = 70
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="RopeMarker" type="Marker2D" parent="Player"]
+position = Vector2(0, -9)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -3)
+node_a = NodePath("../Player")
+node_b = NodePath("../Human")
+bias = 0.9
+softness = 16.0
+angular_limit_lower = -1.5708
+angular_limit_upper = 1.5708
+script = ExtResource("3_veo1t")
+
+[node name="Human" type="RigidBody2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-30, -2)
+collision_layer = 3
+collision_mask = 3
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_6ghb2")
+script = ExtResource("3_6ghb2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Human"]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_veo1t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Human"]
+texture = ExtResource("2_abkd1")
+region_enabled = true
+region_rect = Rect2(41, 10, 13, 18)
+
+[node name="Line" type="Line2D" parent="."]
+position = Vector2(1, 0)
+width = 2.0
+default_color = Color(0.335431, 0.151761, 0.160406, 1)

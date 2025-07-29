@@ -1,6 +1,5 @@
 extends Label
 
-@onready var player: CharacterBody2D = $"../../player"
 @onready var background_music: AudioStreamPlayer2D = $"../../AudioStreamPlayer2D"
 
 const MAX_SCORE = 5
@@ -23,7 +22,9 @@ func add_score():
 	score = score + 1
 	add_shit(1)
 	if(score == MAX_SCORE):
-		player.level_finished()
+		var player_group = get_tree().get_nodes_in_group("dog")
+		for player in player_group:
+			player.level_finished()
 		background_music.stop()
 	
 func add_shit(amount):
